@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "97890621500",
+    "project_id": "royal-riders-d205b",
+    "storage_bucket": "royal-riders-d205b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:97890621500:android:a9bc1a28aef2c6851fcb39",
+        "android_client_info": {
+          "package_name": "com.example.land_survey"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "97890621500-t13oh0a6bnqbh7fqfh5spanesubvdjt7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAvHyiIcAilXPhTeuCYxNG_YoiT6accDBU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "97890621500-t13oh0a6bnqbh7fqfh5spanesubvdjt7.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "97890621500-1ha63lvvg2n7qcm79bng53g9q2qbprbs.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.landSurvey.RunnerTests"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
