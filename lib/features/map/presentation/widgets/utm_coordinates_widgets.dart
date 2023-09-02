@@ -62,7 +62,6 @@ class UtmDialog extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final myValue = ref.watch(calculateUtmNotifierProvider);
-    final utmState = myValue.latLng;
     final northController = useTextEditingController();
     final eastController = useTextEditingController();
     final zoneController = useTextEditingController();

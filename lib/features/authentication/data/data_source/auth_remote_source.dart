@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class AuthRemoteSource {
@@ -16,15 +15,12 @@ class AuthRemoteSource {
 //  SIGNUP WITH EMAIL AND PASSWORD
   Future<bool> signUp(String email, String password) async {
     try {
-      print(email);
-      print(password);
       final user = await _firebaseAuth.createUserWithEmailAndPassword(
           email: email, password: password);
-      print(user.user?.email);
-      // await _firestore.collection("USERS").add({
-      //   'id': user.user?.uid,
-      //   'email': user.user?.email,
-      // });
+      await _firestore.collection("USERS").add({
+        'id': user.user?.uid,
+        'email': user.user?.email,
+      });
       return true;
     } on FirebaseAuthException catch (e){
       throw Exception(e.message);

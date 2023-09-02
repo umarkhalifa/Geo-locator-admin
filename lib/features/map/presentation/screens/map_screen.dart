@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:land_survey/features/authentication/presentation/screens/splash_screen.dart';
 
 import '../providers/map_state_provider.dart';

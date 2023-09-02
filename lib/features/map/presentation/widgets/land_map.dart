@@ -2,25 +2,18 @@ import 'dart:async';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:land_survey/features/map/data/data_soucre/map_local_data_source.dart';
 import 'package:land_survey/features/map/domain/entity/location_point.dart';
 import 'package:land_survey/features/map/presentation/providers/add_point_provider.dart';
 import 'package:land_survey/features/map/presentation/providers/get_point_provider.dart';
-import 'package:land_survey/features/map/presentation/providers/map_state_provider.dart';
 import 'package:land_survey/features/map/presentation/widgets/map_bottom_sheet.dart';
-import 'package:land_survey/features/map/presentation/widgets/map_type_widgets.dart';
-import 'package:land_survey/features/map/presentation/widgets/markers_widget.dart';
 import 'package:land_survey/features/map/presentation/widgets/navigation_widget.dart';
-import 'package:land_survey/features/map/presentation/widgets/utm_coordinates_widgets.dart';
 import 'package:land_survey/utils/map_type.dart';
 import 'package:solar_icons/solar_icons.dart';
 
 import '../../../../core/constants/sizes.dart';
 import '../providers/map_data_state.dart';
-import 'location_card.dart';
 
 final markerIndex = StateProvider<int>((ref) => 0);
 
@@ -117,19 +110,10 @@ class _LandMapState extends ConsumerState<LandMap> {
                 loc1: pointState.markers.elementAt(polyIndex).position,
                 loc2: value,
               ),
-
-            // const MapTypeIcon(),
-            //
-            // const MarkerIcon(),
             NavigationWidget(
-              isCompass: showCompass,
+              isCompass: false,
               changeColor: widget.mapState.mapType == MyMapType.normal,
             ),
-            // LocationCard(
-            //   latController: TextEditingController(text: '${value.latitude}'),
-            //   longController: TextEditingController(text: '${value.longitude}'),
-            //   locationFuture: _updateMap,
-            // ),
             Positioned(
               top: 70,
               right: 15,

@@ -1,14 +1,12 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:land_survey/features/map/domain/entity/location_point.dart';
-import 'package:land_survey/features/map/presentation/screens/map_screen.dart';
-import 'package:firebase_core/firebase_core.dart' ;
+
 import 'core/router/router.dart';
-import 'firebase_options.dart' ;
-
-
 import 'features/map/data/data_soucre/map_local_data_source.dart';
+import 'firebase_options.dart';
 
 void main()async{
   await Hive.initFlutter();
@@ -33,7 +31,7 @@ class MyApp extends ConsumerWidget {
         useMaterial3: true,
         fontFamily: "Faktum",
       ),
-     routerConfig: router,
+      routerConfig: router,
     );
   }
 }
