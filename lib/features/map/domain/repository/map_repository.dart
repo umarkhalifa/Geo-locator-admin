@@ -10,15 +10,19 @@ import 'package:location/location.dart';
 
 abstract class MapRepository {
   Future<Either<Failure, LocationData>> getUsersLocation();
-  Future<Either<Failure, LatLng>> calculateUtm(double northing,double easting,int zone,String band);
+
+  Future<Either<Failure, LatLng>> calculateUtm(
+      double northing, double easting, int zone, String band);
+
   Future<Either<Failure, List<LocationPoint>>> getMapPoints();
+
   Future<Either<Failure, bool>> addMapPoint(LocationPoint locationPoint);
+
   Future<Either<Failure, bool>> deleteMapPoint(int index);
 }
 
 final mapRepositoryProvider = Provider((ref) {
   final dataSource = ref.read(mapDataSourceProvider);
   final localSource = ref.read(mapLocalProvider);
-  return MapRepositoryImpl(dataSource,localSource);
+  return MapRepositoryImpl(dataSource, localSource);
 });
-

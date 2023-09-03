@@ -16,7 +16,9 @@ class SignInNotifier extends StateNotifier<AuthDataState> {
         return state.copyWith(status: AuthState.idle, errorMessage: l.message);
       },
       (r) {
-        return state = state.copyWith(status: AuthState.idle,);
+        return state = state.copyWith(
+          status: AuthState.idle,
+        );
       },
     );
   }

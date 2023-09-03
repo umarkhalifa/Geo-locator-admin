@@ -11,10 +11,9 @@ class AddPointUseCase extends UseCase<bool, LocationPoint> {
   AddPointUseCase(this._mapRepository);
 
   @override
-  Future<Either<Failure, bool>> call(LocationPoint params)async{
+  Future<Either<Failure, bool>> call(LocationPoint params) async {
     return await _mapRepository.addMapPoint(params);
   }
-
 }
 
 final addPointUseCaseProvider = Provider((ref) {

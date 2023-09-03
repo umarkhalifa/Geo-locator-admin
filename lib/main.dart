@@ -8,12 +8,12 @@ import 'core/router/router.dart';
 import 'features/map/data/data_soucre/map_local_data_source.dart';
 import 'firebase_options.dart';
 
-void main()async{
+void main() async {
   await Hive.initFlutter();
   Hive.registerAdapter(LocationPointAdapter());
   boxLocation = await Hive.openBox<LocationPoint>('locations');
-  await Firebase . initializeApp (
-    options : DefaultFirebaseOptions . currentPlatform ,
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
   );
   runApp(const ProviderScope(child: MyApp()));
 }
@@ -35,5 +35,3 @@ class MyApp extends ConsumerWidget {
     );
   }
 }
-
-

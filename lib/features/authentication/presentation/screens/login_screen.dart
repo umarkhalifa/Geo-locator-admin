@@ -54,12 +54,14 @@ class LoginForm extends StatefulHookConsumerWidget {
 
 class _LoginFormState extends ConsumerState<LoginForm> {
   final formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     final registerState = ref.watch(signInNotifier);
     final emailController = useTextEditingController();
     final passwordController = useTextEditingController();
-    ref.listen(signInNotifier.select((value) => value.status), (previous, next) {
+    ref.listen(signInNotifier.select((value) => value.status),
+        (previous, next) {
       if (next == AuthState.error) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
@@ -77,8 +79,8 @@ class _LoginFormState extends ConsumerState<LoginForm> {
           SizedBox(
             height: 100,
             width: 100,
-            child:
-            Lottie.asset("assets/images/animation'.json", fit: BoxFit.cover),
+            child: Lottie.asset("assets/images/animation'.json",
+                fit: BoxFit.cover),
           ),
           const Text(
             "Welcome Back",
@@ -87,7 +89,8 @@ class _LoginFormState extends ConsumerState<LoginForm> {
           RichText(
             text: TextSpan(
               text: "Don't have an account?",
-              style: TextStyle(color: Colors.grey.shade800, fontFamily: "Faktum"),
+              style:
+                  TextStyle(color: Colors.grey.shade800, fontFamily: "Faktum"),
               children: [
                 TextSpan(
                   recognizer: TapGestureRecognizer()
@@ -131,9 +134,9 @@ class _LoginFormState extends ConsumerState<LoginForm> {
             onTap: () {
               if (formKey.currentState!.validate()) {
                 ref.read(signInNotifier.notifier).signIn(
-                  emailController.text.trim(),
-                  passwordController.text.trim(),
-                );
+                      emailController.text.trim(),
+                      passwordController.text.trim(),
+                    );
               }
             },
             child: Material(
@@ -145,17 +148,16 @@ class _LoginFormState extends ConsumerState<LoginForm> {
                 child: Center(
                   child: registerState.status == AuthState.loading
                       ? const CircularProgressIndicator(
-                    color: Colors.white,
-                  )
+                          color: Colors.white,
+                        )
                       : const Text(
-                    "Sign In",
-                    style: TextStyle(color: Colors.white, fontSize: 16),
-                  ),
+                          "Sign In",
+                          style: TextStyle(color: Colors.white, fontSize: 16),
+                        ),
                 ),
               ),
             ),
           ),
-
         ],
       ),
     );
@@ -174,7 +176,8 @@ class AuthForm extends StatelessWidget {
       required this.label,
       required this.hint,
       required this.iconData,
-      this.validator, this.controller});
+      this.validator,
+      this.controller});
 
   @override
   Widget build(BuildContext context) {

@@ -1,9 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:land_survey/features/map/domain/usecases/delet_firestore_points.dart';
-import 'package:land_survey/features/map/domain/usecases/delete_point_usecase.dart';
 import 'package:land_survey/features/map/presentation/providers/map_data_state.dart';
-
-import 'get_point_provider.dart';
 
 class DeletePointsNotifier extends StateNotifier<MapDataState> {
   DeletePointsNotifier(this._deletePointUseCase, this._ref)

@@ -10,12 +10,9 @@ class DeletePointUseCase extends UseCase<bool, int> {
   DeletePointUseCase(this._mapRepository);
 
   @override
-  Future<Either<Failure, bool>> call(int params)async{
+  Future<Either<Failure, bool>> call(int params) async {
     return await _mapRepository.deleteMapPoint(params);
   }
-
-
-
 }
 
 final deletePointUseCaseProvider = Provider((ref) {

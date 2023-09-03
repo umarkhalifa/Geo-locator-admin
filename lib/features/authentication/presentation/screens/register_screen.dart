@@ -10,7 +10,6 @@ import 'package:land_survey/utils/validation_extension.dart';
 import 'package:lottie/lottie.dart';
 import 'package:solar_icons/solar_icons.dart';
 
-
 class RegisterScreen extends StatelessWidget {
   const RegisterScreen({super.key});
 
@@ -53,7 +52,8 @@ class _RegisterFormState extends ConsumerState<RegisterForm> {
     final registerState = ref.watch(registerNotifier);
     final emailController = useTextEditingController();
     final passwordController = useTextEditingController();
-    ref.listen(registerNotifier.select((value) => value.status), (previous, next) {
+    ref.listen(registerNotifier.select((value) => value.status),
+        (previous, next) {
       if (next == AuthState.error) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(

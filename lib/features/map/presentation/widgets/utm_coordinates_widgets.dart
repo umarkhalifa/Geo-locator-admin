@@ -9,15 +9,20 @@ class CalculateUtmIcon extends StatelessWidget {
   final Future<void> Function(double lat, double long) locationFuture;
 
   const CalculateUtmIcon({
-    super.key, required this.locationFuture,
+    super.key,
+    required this.locationFuture,
   });
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: ()async{
-        final location = await showDialog(context: context, builder: (context) => const UtmDialog());
-        location != null ?locationFuture(location.latitude,location.longitude):null;
+      onTap: () async {
+        Navigator.pop(context);
+        final location = await showDialog(
+            context: context, builder: (context) => const UtmDialog());
+        location != null
+            ? locationFuture(location.latitude, location.longitude)
+            : null;
       },
       child: const Row(
         children: [
@@ -37,13 +42,9 @@ class CalculateUtmIcon extends StatelessWidget {
               Text(
                 "Calculate coordinates",
                 style: TextStyle(
-                    fontWeight: FontWeight.w500,
-                    fontSize: 16,
-                    height: 1
-                ),
+                    fontWeight: FontWeight.w500, fontSize: 16, height: 1),
               ),
               Text("Latitude,Longitude"),
-
             ],
           ),
           Spacer(),
@@ -95,12 +96,11 @@ class UtmDialog extends HookConsumerWidget {
                     constraints: BoxConstraints(maxHeight: 48),
                     border: InputBorder.none,
                     enabledBorder: InputBorder.none,
-                    hintStyle: TextStyle(
-                        fontSize: 13, fontWeight: FontWeight.w100),
+                    hintStyle:
+                        TextStyle(fontSize: 13, fontWeight: FontWeight.w100),
                     hintText: "Enter Easting....."),
               ),
             ),
-
             const SizedBox(
               height: 20,
             ),
@@ -116,11 +116,10 @@ class UtmDialog extends HookConsumerWidget {
                     border: InputBorder.none,
                     enabledBorder: InputBorder.none,
                     hintText: "Enter Northing.....",
-                    hintStyle: TextStyle(
-                        fontSize: 13, fontWeight: FontWeight.w100)),
+                    hintStyle:
+                        TextStyle(fontSize: 13, fontWeight: FontWeight.w100)),
               ),
             ),
-
             const SizedBox(
               height: 20,
             ),
@@ -144,7 +143,9 @@ class UtmDialog extends HookConsumerWidget {
                     ),
                   ),
                 ),
-                const SizedBox(width: 20,),
+                const SizedBox(
+                  width: 20,
+                ),
                 Expanded(
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(10),
@@ -169,14 +170,17 @@ class UtmDialog extends HookConsumerWidget {
             ),
             Center(
               child: GestureDetector(
-                onTap: ()async {
-                  await ref.read(calculateUtmNotifierProvider.notifier).calculateUtm(
-                      double.parse(northController.text.trim()),
-                      double.parse(eastController.text.trim()),
-                      int.parse(zoneController.text.trim()),
-                      bandController.text.trim()
-                  ).then((value){
-                    Navigator.pop(context,ref.read(calculateUtmNotifierProvider).latLng);
+                onTap: () async {
+                  await ref
+                      .read(calculateUtmNotifierProvider.notifier)
+                      .calculateUtm(
+                          double.parse(northController.text.trim()),
+                          double.parse(eastController.text.trim()),
+                          int.parse(zoneController.text.trim()),
+                          bandController.text.trim())
+                      .then((value) {
+                    Navigator.pop(
+                        context, ref.read(calculateUtmNotifierProvider).latLng);
                   });
                 },
                 child: Container(
@@ -187,17 +191,17 @@ class UtmDialog extends HookConsumerWidget {
                       borderRadius: BorderRadius.circular(10)),
                   child: Center(
                       child: switch (myValue.isLoading) {
-                        true => const Padding(
-                          padding: EdgeInsets.symmetric(vertical: 3),
-                          child: CircularProgressIndicator(
-                            color: Colors.white,
-                          ),
+                    true => const Padding(
+                        padding: EdgeInsets.symmetric(vertical: 3),
+                        child: CircularProgressIndicator(
+                          color: Colors.white,
                         ),
-                        false => const Text(
-                          "Search",
-                          style: TextStyle(color: Colors.white),
-                        )
-                      }),
+                      ),
+                    false => const Text(
+                        "Search",
+                        style: TextStyle(color: Colors.white),
+                      )
+                  }),
                 ),
               ),
             ),

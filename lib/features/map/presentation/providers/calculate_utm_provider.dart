@@ -39,7 +39,7 @@ class CalculateUtmUseState {
 }
 
 final calculateUtmNotifierProvider =
-StateNotifierProvider<CalculateUtmNotifier, CalculateUtmUseState>((ref) {
+    StateNotifierProvider<CalculateUtmNotifier, CalculateUtmUseState>((ref) {
   final useCase = ref.watch(calculateUtmProvider);
   return CalculateUtmNotifier(useCase);
 });

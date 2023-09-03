@@ -24,7 +24,7 @@ class RegisterParams {
 }
 
 final registerUseCase = Provider(
-      (ref) {
+  (ref) {
     final repo = ref.read(authRepositoryProvider);
     return RegisterUseCase(repo);
   },

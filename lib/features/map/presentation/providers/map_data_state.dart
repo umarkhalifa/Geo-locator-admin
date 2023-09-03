@@ -9,7 +9,8 @@ class MapDataState {
   final bool isLoading;
   final bool showCompass;
 
-  MapDataState(this.latitude, this.longitude, this.mapType, this.markers, this.isLoading, this.showCompass);
+  MapDataState(this.latitude, this.longitude, this.mapType, this.markers,
+      this.isLoading, this.showCompass);
 
   MapDataState.initial(
       {this.longitude = 0.0,
@@ -17,8 +18,7 @@ class MapDataState {
       this.mapType = MyMapType.normal,
       this.markers = const {},
       this.isLoading = false,
-        this.showCompass = false
-      });
+      this.showCompass = false});
 
   MapDataState copyWith(
       {double? latitude,
@@ -28,13 +28,12 @@ class MapDataState {
       bool? isLoading,
       bool? showCompass}) {
     return MapDataState(
-      latitude ?? this.latitude,
-      longitude ?? this.longitude,
-      mapType ?? this.mapType,
-      markers ?? this.markers,
-      isLoading ?? this.isLoading,
-      showCompass ?? this.showCompass
-    );
+        latitude ?? this.latitude,
+        longitude ?? this.longitude,
+        mapType ?? this.mapType,
+        markers ?? this.markers,
+        isLoading ?? this.isLoading,
+        showCompass ?? this.showCompass);
   }
 }
 
@@ -49,7 +48,7 @@ class MarkersState {
     this.isLoading = false,
   });
 
-  MarkersState copyWith({ Set<Marker>? markers, bool? isLoading}) {
+  MarkersState copyWith({Set<Marker>? markers, bool? isLoading}) {
     return MarkersState(
       markers ?? this.markers,
       isLoading ?? this.isLoading,

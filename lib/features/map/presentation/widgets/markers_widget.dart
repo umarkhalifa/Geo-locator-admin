@@ -15,7 +15,7 @@ class MarkerIcon extends ConsumerWidget {
   });
 
   @override
-  Widget build(BuildContext context,WidgetRef ref) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return GestureDetector(
       // onTap: () async {
       //   await showModalBottomSheet(
@@ -43,7 +43,8 @@ class MarkerIcon extends ConsumerWidget {
                 style: TextStyle(
                     fontWeight: FontWeight.w500, fontSize: 16, height: 1),
               ),
-              Text("${ref.watch(getPointsProvider).markers.length} points marked")
+              Text(
+                  "${ref.watch(getPointsProvider).markers.length} points marked")
             ],
           ),
           const Spacer(),
@@ -83,11 +84,10 @@ class MarkersBottomSheet extends ConsumerWidget {
             },
             //UPDATE MARKER INDEX
             onTap: () {
-              if(ref.read(mapNotifierProvider).showCompass){
+              if (ref.read(mapNotifierProvider).showCompass) {
                 ref.read(markerIndex.notifier).state = index;
                 Navigator.pop(context);
               }
-
             },
             child: Container(
               decoration: BoxDecoration(
@@ -106,8 +106,7 @@ class MarkersBottomSheet extends ConsumerWidget {
                     children: [
                       Text(
                         "Marker Point ${index + 1}",
-                        style: const TextStyle(
-                            fontWeight: FontWeight.w500),
+                        style: const TextStyle(fontWeight: FontWeight.w500),
                       ),
                       Text(
                         "Latitude: ${mapState.markers.elementAt(index).position.latitude.toStringAsFixed(6)}",

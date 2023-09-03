@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:land_survey/features/map/data/model/user_model.dart';
 import 'package:land_survey/features/map/domain/entity/location_point.dart';
+import 'package:land_survey/features/map/domain/entity/user.dart';
 
 class MapFirestoreData {
   final FirebaseFirestore _firestore;
@@ -31,14 +33,23 @@ class MapFirestoreData {
     });
   }
 
-  Future<bool> deletePoint(int index)async{
-    try{
-      final data =  await _firestore.collection("POINTS").get();
+  Future<bool> deletePoint(int index) async {
+    try {
+      final data = await _firestore.collection("POINTS").get();
       final id = data.docs.elementAt(index).id;
       _firestore.collection("POINTS").doc(id).delete();
       return true;
-    }catch (e){
-      throw(Exception('Error deleting point'));
+    } catch (e) {
+      throw (Exception('Error deleting point'));
+    }
+  }
+
+  Future<List<LandUserModel>> fetchUsers()async{
+    try{
+      final data = await _firestore.collection("USERS").get();
+      return data.docs.map((e) => LandUserModel.fromFirebase(e.data())).toList();
+    }catch(e){
+      throw(Exception("Error fetching user"));
     }
   }
 }
@@ -46,4 +57,3 @@ class MapFirestoreData {
 final firestoreDataProvider = Provider((ref) {
   return MapFirestoreData(FirebaseFirestore.instance);
 });
-

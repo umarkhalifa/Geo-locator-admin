@@ -18,18 +18,19 @@ class NavigationWidget extends StatelessWidget {
     return switch (isCompass) {
       true => const Compass(),
       false => Center(
-        child: Icon(
-          SolarIconsOutline.gps, // Use any icon you prefer
-          color: switch (changeColor) {
-            true => const Color(0xff2d3e52),
-            false => const Color(0XffFFFFFF)
-          },
-          size: 48.0,
-        ),
-      )
+          child: Icon(
+            SolarIconsOutline.gps, // Use any icon you prefer
+            color: switch (changeColor) {
+              true => const Color(0xff2d3e52),
+              false => const Color(0XffFFFFFF)
+            },
+            size: 48.0,
+          ),
+        )
     };
   }
 }
+
 class Compass extends StatelessWidget {
   const Compass({super.key});
 

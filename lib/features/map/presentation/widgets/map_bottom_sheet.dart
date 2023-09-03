@@ -1,7 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:land_survey/core/constants/sizes.dart';
+import 'package:land_survey/features/map/presentation/providers/users_provider.dart';
 import 'package:land_survey/features/map/presentation/widgets/location_card.dart';
 import 'package:land_survey/features/map/presentation/widgets/map_type_widgets.dart';
 import 'package:land_survey/features/map/presentation/widgets/markers_widget.dart';
@@ -55,6 +57,11 @@ class LandBottomSheet extends HookWidget {
               CalculateUtmIcon(
                 locationFuture: locationFuture,
               ),
+
+              const Divider(
+                thickness: 0.4,
+              ),
+              const UsersIcon(),
               const Divider(
                 thickness: 0.4,
               ),
@@ -111,3 +118,46 @@ class LogoutIcon extends StatelessWidget {
     );
   }
 }
+
+class UsersIcon extends StatelessWidget {
+  const UsersIcon({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      child: Row(
+        children: [
+          const SizedBox(
+            height: 45,
+            width: 45,
+            child: Icon(
+              SolarIconsOutline.user,
+              color: Colors.blue,
+              size: 30,
+            ),
+          ),
+          gapW20,
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Text(
+                "Number of Users",
+                style: TextStyle(
+                    fontWeight: FontWeight.w500, fontSize: 16, height: 1),
+              ),
+              Consumer(builder: (context,ref,child){
+                final users = ref.watch(fetchUsersNotifier);
+                return Text("${users.length} users");
+              })
+            ],
+          ),
+          const Spacer(),
+          const Icon(SolarIconsOutline.arrowRight)
+        ],
+      ),
+    );
+  }
+}
+

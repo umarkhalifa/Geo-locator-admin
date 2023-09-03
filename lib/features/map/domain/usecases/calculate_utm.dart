@@ -31,4 +31,3 @@ final calculateUtmProvider = Provider((ref) {
   final repository = ref.read(mapRepositoryProvider);
   return CalculateUtmUseCase(repository);
 });
-

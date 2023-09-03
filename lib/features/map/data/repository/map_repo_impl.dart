@@ -24,41 +24,44 @@ class MapRepositoryImpl implements MapRepository {
   }
 
   @override
-  Future<Either<Failure, LatLng>> calculateUtm(double northing, double easting, int zone, String band)async {
-    try{
-      final value =  await _mapRemoteDataSource.calculateUtm(northing, easting, zone, band);
+  Future<Either<Failure, LatLng>> calculateUtm(
+      double northing, double easting, int zone, String band) async {
+    try {
+      final value = await _mapRemoteDataSource.calculateUtm(
+          northing, easting, zone, band);
       return Right(value);
-    }catch(e){
+    } catch (e) {
       return const Left(Failure("Error calculating coordinates"));
     }
   }
 
   @override
-  Future<Either<Failure, bool>> addMapPoint(LocationPoint locationPoint)async{
-    try{
-      final value =  await _mapLocalDataSource.addLocationPoint(locationPoint: locationPoint);
+  Future<Either<Failure, bool>> addMapPoint(LocationPoint locationPoint) async {
+    try {
+      final value = await _mapLocalDataSource.addLocationPoint(
+          locationPoint: locationPoint);
       return Right(value);
-    }catch(e){
+    } catch (e) {
       return const Left(Failure("Error adding point"));
     }
   }
 
   @override
-  Future<Either<Failure, bool>> deleteMapPoint(int index) async{
-    try{
-      final value =  await _mapLocalDataSource.deleteLocationPoint(index: index);
+  Future<Either<Failure, bool>> deleteMapPoint(int index) async {
+    try {
+      final value = await _mapLocalDataSource.deleteLocationPoint(index: index);
       return Right(value);
-    }catch(e){
+    } catch (e) {
       return const Left(Failure("Error deleting point"));
     }
   }
 
   @override
-  Future<Either<Failure, List<LocationPoint>>> getMapPoints()async{
-    try{
-      final value =  await _mapLocalDataSource.getLocationPoint();
+  Future<Either<Failure, List<LocationPoint>>> getMapPoints() async {
+    try {
+      final value = await _mapLocalDataSource.getLocationPoint();
       return Right(value);
-    }catch(e){
+    } catch (e) {
       return const Left(Failure("Error fetching points"));
     }
   }
