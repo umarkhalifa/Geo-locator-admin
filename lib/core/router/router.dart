@@ -19,7 +19,6 @@ final routeProvider = Provider((ref) {
       return null;
     },
     initialLocation: '/login',
-    debugLogDiagnostics: true,
     routes: [
       GoRoute(
         path: '/',
