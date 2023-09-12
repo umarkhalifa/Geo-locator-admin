@@ -74,12 +74,13 @@ Accuracy, efficiency, and adaptability are the pillars of success in land survey
 Existing equipment and technology are sometimes insufficient to provide the precision and efficiency required for land surveyors to flourish in their profession. Outdated mapping technologies, time-consuming data management systems, and restricted location-based services might result in mistakes, greater time investment, and data inconsistencies, eventually impeding land surveyors' Furthermore, there is a need for safe and efficient data sharing across organizations.
 
 # User Interface/ User Experience
-![Screenshot_20230907-182736](https://github.com/umarkhalifa/land-survey/assets/112028682/2ef814ee-8d47-4999-9421-ef020ec5ed97)
-![Screenshot_20230907-182626](https://github.com/umarkhalifa/land-survey/assets/112028682/ff587f9f-9485-4ee5-9e8a-472ae14abf8a)
-![Screenshot_20230907-182622](https://github.com/umarkhalifa/land-survey/assets/112028682/cf4d76f7-0cac-404a-9a1a-e7a69c166fd5)
-![Screenshot_20230907-182618](https://github.com/umarkhalifa/land-survey/assets/112028682/5f841fc8-eb39-4cc6-89da-e86d129f3446)
-![Screenshot_20230907-182614](https://github.com/umarkhalifa/land-survey/assets/112028682/d261806b-b7e8-4b42-98c1-b81eb855439d)
-![Screenshot_20230907-182608](https://github.com/umarkhalifa/land-survey/assets/112028682/3e979b80-cc32-4725-a4d2-6042d173fb3f)
+![Screenshot_20230907-182736](https://github.com/umarkhalifa/land-survey/assets/112028682/38f5c564-3dc0-41dc-b34c-29a532a2fcb6)
+![Screenshot_20230907-182626](https://github.com/umarkhalifa/land-survey/assets/112028682/f6034e24-c811-4c2e-a9d3-1e0f1b23e877)
+![Screenshot_20230907-182622](https://github.com/umarkhalifa/land-survey/assets/112028682/deaa41a6-4473-4a00-8c46-a8857b37a862)
+![Screenshot_20230907-182618](https://github.com/umarkhalifa/land-survey/assets/112028682/61ae8388-1949-4677-b46e-218537a76028)
+![Screenshot_20230907-182614](https://github.com/umarkhalifa/land-survey/assets/112028682/e9891b9c-be23-47b5-a142-3f74bc789dd8)
+![Screenshot_20230907-182608](https://github.com/umarkhalifa/land-survey/assets/112028682/0ab6f3ac-a12a-421e-9bc3-2d82a9e5dd88)
+
 
  
 
