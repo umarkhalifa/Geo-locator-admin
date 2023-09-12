@@ -4,15 +4,22 @@ import 'package:land_survey/features/map/domain/usecases/add_firestore_points.da
 import 'package:land_survey/features/map/presentation/providers/map_data_state.dart';
 
 class AddPointsNotifier extends StateNotifier<MapDataState> {
-  AddPointsNotifier(this._addPointUseCase, this._ref)
+  AddPointsNotifier(this._addPointUseCase)
       : super(MapDataState.initial());
 
   final AddFirestorePointUseCase _addPointUseCase;
-  final Ref _ref;
 
   Future<void> addPoint(LocationPoint locationPoint) async {
-    final value = await _addPointUseCase.call(
-        AddFirestoreParams(locationPoint.latitude, locationPoint.longitude));
+    state = state.copyWith(isLoading: true);
+    final value = await _addPointUseCase.call(AddFirestoreParams(
+        locationPoint.latitude,
+        locationPoint.longitude,
+        locationPoint.northing,
+        locationPoint.easting,
+        locationPoint.zone,
+        locationPoint.band,
+        locationPoint.name,
+        locationPoint.height));
     state = value.fold((l) {
       return state.copyWith(isLoading: false);
     }, (r) {
@@ -27,5 +34,5 @@ class AddPointsNotifier extends StateNotifier<MapDataState> {
 final addPointsProvider =
     StateNotifierProvider<AddPointsNotifier, MapDataState>((ref) {
   final useCase = ref.read(addFirestorePointsUseCaseProvider);
-  return AddPointsNotifier(useCase, ref);
+  return AddPointsNotifier(useCase);
 });

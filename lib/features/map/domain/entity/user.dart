@@ -1,4 +1,4 @@
-class LandUser{
+class LandUser {
   final String? email;
   final String? password;
 

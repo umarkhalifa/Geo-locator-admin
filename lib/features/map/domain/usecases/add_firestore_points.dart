@@ -12,7 +12,15 @@ class AddFirestorePointUseCase extends UseCase<bool, AddFirestoreParams> {
 
   @override
   Future<Either<Failure, bool>> call(AddFirestoreParams params) async {
-    return _mapRepository.addPoint(params.latitude, params.longitude);
+    return _mapRepository.addPoint(
+        params.latitude,
+        params.longitude,
+        params.northing,
+        params.easting,
+        params.zone,
+        params.band,
+        params.name,
+        params.height);
   }
 }
 
@@ -24,6 +32,13 @@ final addFirestorePointsUseCaseProvider = Provider((ref) {
 class AddFirestoreParams {
   final double latitude;
   final double longitude;
+  final double northing;
+  final double easting;
+  final int zone;
+  final String band;
+  final String name;
+  final double height;
 
-  AddFirestoreParams(this.latitude, this.longitude);
+  AddFirestoreParams(this.latitude, this.longitude, this.northing, this.easting,
+      this.zone, this.band, this.name, this.height);
 }

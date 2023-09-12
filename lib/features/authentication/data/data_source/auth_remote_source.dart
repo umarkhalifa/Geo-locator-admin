@@ -33,9 +33,15 @@ class AuthRemoteSource {
   //  SIGNUP WITH EMAIL AND PASSWORD
   Future<bool> signIn(String email, String password) async {
     try {
+      if (email != "geonavadmin@gmail.com") {
+        throw Exception('Check credentials and try again');
+      }
       await _firebaseAuth.signInWithEmailAndPassword(
           email: email, password: password);
+
       return true;
+    } on Exception catch (e) {
+      throw Exception('Check credentials and try again');
     } catch (e) {
       throw Exception('Check credentials and try again');
     }

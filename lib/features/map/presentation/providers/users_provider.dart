@@ -3,7 +3,9 @@ import 'package:land_survey/features/map/domain/entity/user.dart';
 import 'package:land_survey/features/map/domain/usecases/fetch_users_usecase.dart';
 
 class FetchUsersNotifier extends StateNotifier<List<LandUser>> {
-  FetchUsersNotifier(this._useCase) : super([]){fetchUsers();}
+  FetchUsersNotifier(this._useCase) : super([]) {
+    fetchUsers();
+  }
 
   final FetchUsersUseCase _useCase;
 
@@ -17,7 +19,9 @@ class FetchUsersNotifier extends StateNotifier<List<LandUser>> {
   }
 }
 
-final fetchUsersNotifier = StateNotifierProvider.autoDispose<FetchUsersNotifier, List<LandUser>>((ref){
-  final useCase = ref.read( fetchUsersCaseProvider);
+final fetchUsersNotifier =
+    StateNotifierProvider.autoDispose<FetchUsersNotifier, List<LandUser>>(
+        (ref) {
+  final useCase = ref.read(fetchUsersCaseProvider);
   return FetchUsersNotifier(useCase);
 });

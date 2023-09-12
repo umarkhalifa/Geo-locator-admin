@@ -5,8 +5,9 @@ import 'package:land_survey/features/map/domain/usecases/get_firestore_points.da
 import 'package:land_survey/features/map/presentation/providers/map_data_state.dart';
 
 class GetPointsNotifier extends StateNotifier<MapDataState> {
-  GetPointsNotifier(this._getPointUseCase,)
-      : super(MapDataState.initial()) {
+  GetPointsNotifier(
+    this._getPointUseCase,
+  ) : super(MapDataState.initial()) {
     getPoints();
   }
 
@@ -30,7 +31,7 @@ class GetPointsNotifier extends StateNotifier<MapDataState> {
             ),
           );
         }
-        return state = state.copyWith(markers: markers);
+        return state = state.copyWith(markers: markers, points: r);
       });
     }
   }

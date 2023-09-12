@@ -15,7 +15,8 @@ class MapTypeIcon extends StatelessWidget {
     return GestureDetector(
       onTap: () async {
         await showDialog(
-            context: context, builder: (context) => const MapTypeDialog());
+                context: context, builder: (context) => const MapTypeDialog())
+            .then((value) => Navigator.pop(context));
       },
       child: Row(
         children: [

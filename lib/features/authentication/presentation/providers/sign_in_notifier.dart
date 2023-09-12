@@ -13,7 +13,9 @@ class SignInNotifier extends StateNotifier<AuthDataState> {
         await _useCase.call(LoginParams(email: email, password: password));
     state = value.fold(
       (l) {
-        return state.copyWith(status: AuthState.idle, errorMessage: l.message);
+        return state.copyWith(
+            status: AuthState.error,
+            errorMessage: "Check credentials and try again");
       },
       (r) {
         return state = state.copyWith(

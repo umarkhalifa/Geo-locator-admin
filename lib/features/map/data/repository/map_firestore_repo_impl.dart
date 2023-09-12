@@ -13,9 +13,17 @@ class MapFirestoreRepoImpl implements MapFirestoreRepository {
 
   @override
   Future<Either<Failure, bool>> addPoint(
-      double latitude, double longitude) async {
+      double latitude,
+      double longitude,
+      double northing,
+      double easting,
+      int zone,
+      String band,
+      String name,
+      double height) async {
     try {
-      return Right(await _firestoreData.addPoint(latitude, longitude));
+      return Right(await _firestoreData.addPoint(
+          latitude, longitude, northing, easting, zone, band, name, height));
     } catch (e) {
       return Left(Failure(e.toString()));
     }
@@ -43,10 +51,10 @@ class MapFirestoreRepoImpl implements MapFirestoreRepository {
   }
 
   @override
-  Future<Either<Failure, List<LandUser>>> fetchUsers()async{
-    try{
+  Future<Either<Failure, List<LandUser>>> fetchUsers() async {
+    try {
       return Right(await _firestoreData.fetchUsers());
-    }catch (e){
+    } catch (e) {
       return Left(Failure(e.toString()));
     }
   }
