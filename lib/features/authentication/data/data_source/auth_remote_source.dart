@@ -5,10 +5,11 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 class AuthRemoteSource {
   final FirebaseAuth _firebaseAuth;
   final FirebaseFirestore _firestore;
+
   AuthRemoteSource(this._firebaseAuth, this._firestore);
 
   //STREAM OF AUTH USER
-  Stream<User?> getUser (){
+  Stream<User?> getUser() {
     return _firebaseAuth.authStateChanges();
   }
 
@@ -22,9 +23,9 @@ class AuthRemoteSource {
         'email': user.user?.email,
       });
       return true;
-    } on FirebaseAuthException catch (e){
+    } on FirebaseAuthException catch (e) {
       throw Exception(e.message);
-    }catch (e) {
+    } catch (e) {
       throw Exception('Check credentials and try again');
     }
   }
@@ -32,9 +33,15 @@ class AuthRemoteSource {
   //  SIGNUP WITH EMAIL AND PASSWORD
   Future<bool> signIn(String email, String password) async {
     try {
+      if (email != "geonavadmin@gmail.com") {
+        throw Exception('Check credentials and try again');
+      }
       await _firebaseAuth.signInWithEmailAndPassword(
           email: email, password: password);
+
       return true;
+    } on Exception catch (e) {
+      throw Exception('Check credentials and try again');
     } catch (e) {
       throw Exception('Check credentials and try again');
     }

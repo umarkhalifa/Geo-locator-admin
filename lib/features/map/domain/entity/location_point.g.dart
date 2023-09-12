@@ -19,17 +19,35 @@ class LocationPointAdapter extends TypeAdapter<LocationPoint> {
     return LocationPoint(
       latitude: fields[0] as double,
       longitude: fields[1] as double,
+      northing: fields[2] as double,
+      easting: fields[3] as double,
+      zone: fields[4] as int,
+      band: fields[5] as String,
+      name: fields[6] as String,
+      height: fields[7] as double,
     );
   }
 
   @override
   void write(BinaryWriter writer, LocationPoint obj) {
     writer
-      ..writeByte(2)
+      ..writeByte(8)
       ..writeByte(0)
       ..write(obj.latitude)
       ..writeByte(1)
-      ..write(obj.longitude);
+      ..write(obj.longitude)
+      ..writeByte(2)
+      ..write(obj.northing)
+      ..writeByte(3)
+      ..write(obj.easting)
+      ..writeByte(4)
+      ..write(obj.zone)
+      ..writeByte(5)
+      ..write(obj.band)
+      ..writeByte(6)
+      ..write(obj.name)
+      ..writeByte(7)
+      ..write(obj.height);
   }
 
   @override

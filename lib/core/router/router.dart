@@ -1,9 +1,7 @@
-
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:land_survey/core/router/router_names.dart';
 import 'package:land_survey/features/authentication/presentation/screens/login_screen.dart';
-import 'package:land_survey/features/authentication/presentation/screens/register_screen.dart';
 import 'package:land_survey/features/authentication/presentation/screens/splash_screen.dart';
 import 'package:land_survey/features/map/presentation/screens/map_screen.dart';
 
@@ -14,12 +12,10 @@ final routeProvider = Provider((ref) {
   return GoRouter(
     redirect: (context, state) {
       final isLoggedIn = authState;
-      if (isLoggedIn && state.location == '/register') return '/home';
       if (isLoggedIn && state.location == '/login') return '/home';
       return null;
     },
     initialLocation: '/login',
-    debugLogDiagnostics: true,
     routes: [
       GoRoute(
         path: '/',
@@ -31,11 +27,11 @@ final routeProvider = Provider((ref) {
         name: RouterNames.login.name,
         builder: (context, state) => const LoginScreen(),
       ),
-      GoRoute(
-        path: '/register',
-        name: RouterNames.register.name,
-        builder: (context, state) => const RegisterScreen(),
-      ),
+      // GoRoute(
+      //   path: '/register',
+      //   name: RouterNames.register.name,
+      //   builder: (context, state) => const RegisterScreen(),
+      // ),
       GoRoute(
         path: '/home',
         name: RouterNames.home.name,

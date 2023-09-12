@@ -10,8 +10,6 @@ class AuthRepoImpl implements AuthRepository {
 
   AuthRepoImpl(this._authRemoteSource);
 
-
-
   @override
   Future<Either<Failure, bool>> register(String email, String password) async {
     try {

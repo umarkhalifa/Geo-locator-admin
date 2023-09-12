@@ -18,8 +18,6 @@ class AuthStateNotifier extends StateNotifier<bool> {
       }
     });
   }
-
-
 }
 
 final authStateNotifier = StateNotifierProvider<AuthStateNotifier, bool>(

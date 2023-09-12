@@ -25,7 +25,7 @@ class MapScreenNotifier extends StateNotifier<MapDataState> {
     state = state.copyWith(mapType: mapType);
   }
 
-  void updateCompass(){
+  void updateCompass() {
     state = state.copyWith(showCompass: !state.showCompass);
   }
 }

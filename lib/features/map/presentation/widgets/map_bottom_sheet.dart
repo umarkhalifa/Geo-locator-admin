@@ -5,6 +5,7 @@ import 'package:land_survey/core/constants/sizes.dart';
 import 'package:land_survey/features/map/presentation/widgets/location_card.dart';
 import 'package:land_survey/features/map/presentation/widgets/map_type_widgets.dart';
 import 'package:land_survey/features/map/presentation/widgets/markers_widget.dart';
+import 'package:land_survey/features/map/presentation/widgets/users.dart';
 import 'package:land_survey/features/map/presentation/widgets/utm_coordinates_widgets.dart';
 import 'package:solar_icons/solar_icons.dart';
 
@@ -40,6 +41,22 @@ class LandBottomSheet extends HookWidget {
         child: SingleChildScrollView(
           child: Column(
             children: [
+              gapH12,
+              Row(
+                children: [
+                  const Spacer(),
+                  const Text(
+                    "Navigation Tools",
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
+                  ),
+                  const Spacer(),
+                  GestureDetector(
+                    onTap: () => Navigator.pop(context),
+                    child: const Icon(SolarIconsOutline.closeSquare),
+                  ),
+                ],
+              ),
+              gapH24,
               LocationCard(
                   latController: latController,
                   longController: longController,
@@ -58,9 +75,15 @@ class LandBottomSheet extends HookWidget {
               const Divider(
                 thickness: 0.4,
               ),
+              const UsersIcon(),
+              const Divider(
+                thickness: 0.4,
+              ),
               const MarkerIcon(),
               gapH16,
-              const MarkersBottomSheet(),
+              MarkersBottomSheet(
+                locationFuture: locationFuture,
+              ),
               const Divider(
                 thickness: 0.4,
               ),

@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:solar_icons/solar_icons.dart';
+
 class LocationCard extends StatelessWidget {
   final TextEditingController latController;
   final TextEditingController longController;
@@ -9,9 +10,9 @@ class LocationCard extends StatelessWidget {
 
   const LocationCard(
       {super.key,
-        required this.latController,
-        required this.longController,
-        required this.locationFuture});
+      required this.latController,
+      required this.longController,
+      required this.locationFuture});
 
   @override
   Widget build(BuildContext context) {
@@ -43,6 +44,7 @@ class LocationCard extends StatelessWidget {
                     double lat = double.parse(latController.text.trim());
                     double long = double.parse(longController.text.trim());
                     locationFuture(lat, long);
+                    Navigator.pop(context);
                   });
                 },
                 keyboardType: TextInputType.number,
@@ -62,8 +64,8 @@ class LocationCard extends StatelessWidget {
                       ),
                     ),
                     labelText: "Latitude",
-                    labelStyle: TextStyle(
-                        fontSize: 13, fontWeight: FontWeight.w100)),
+                    labelStyle:
+                        TextStyle(fontSize: 13, fontWeight: FontWeight.w100)),
               ),
             ),
           ],
@@ -96,6 +98,7 @@ class LocationCard extends StatelessWidget {
                     double lat = double.parse(latController.text.trim());
                     double long = double.parse(longController.text.trim());
                     locationFuture(lat, long);
+                    Navigator.pop(context);
                   });
                 },
                 keyboardType: TextInputType.number,
@@ -115,8 +118,8 @@ class LocationCard extends StatelessWidget {
                       ),
                     ),
                     labelText: "Longitude",
-                    labelStyle: TextStyle(
-                        fontSize: 13, fontWeight: FontWeight.w100)),
+                    labelStyle:
+                        TextStyle(fontSize: 13, fontWeight: FontWeight.w100)),
               ),
             ),
           ],

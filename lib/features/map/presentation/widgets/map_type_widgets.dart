@@ -15,7 +15,8 @@ class MapTypeIcon extends StatelessWidget {
     return GestureDetector(
       onTap: () async {
         await showDialog(
-            context: context, builder: (context) => const MapTypeDialog());
+                context: context, builder: (context) => const MapTypeDialog())
+            .then((value) => Navigator.pop(context));
       },
       child: Row(
         children: [
@@ -35,16 +36,12 @@ class MapTypeIcon extends StatelessWidget {
               const Text(
                 "Map Type",
                 style: TextStyle(
-                  fontWeight: FontWeight.w500,
-                  fontSize: 16,
-                  height: 1
-                ),
+                    fontWeight: FontWeight.w500, fontSize: 16, height: 1),
               ),
-              Consumer(builder: (context,ref,child){
+              Consumer(builder: (context, ref, child) {
                 final type = ref.watch(mapNotifierProvider);
                 return Text(type.mapType.toText());
               }),
-
             ],
           ),
           const Spacer(),

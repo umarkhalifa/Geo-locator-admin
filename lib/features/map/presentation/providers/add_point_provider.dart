@@ -1,29 +1,38 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:land_survey/features/map/domain/entity/location_point.dart';
-import 'package:land_survey/features/map/domain/usecases/add_point_usecase.dart';
-import 'package:land_survey/features/map/presentation/providers/get_point_provider.dart';
+import 'package:land_survey/features/map/domain/usecases/add_firestore_points.dart';
 import 'package:land_survey/features/map/presentation/providers/map_data_state.dart';
 
 class AddPointsNotifier extends StateNotifier<MapDataState> {
-  AddPointsNotifier(this._addPointUseCase, this._ref) : super(MapDataState.initial());
+  AddPointsNotifier(this._addPointUseCase)
+      : super(MapDataState.initial());
 
-  final AddPointUseCase _addPointUseCase;
-  final Ref _ref;
+  final AddFirestorePointUseCase _addPointUseCase;
 
-  Future<void> addPoint(LocationPoint locationPoint)async{
-    final value = await _addPointUseCase.call(locationPoint);
+  Future<void> addPoint(LocationPoint locationPoint) async {
+    state = state.copyWith(isLoading: true);
+    final value = await _addPointUseCase.call(AddFirestoreParams(
+        locationPoint.latitude,
+        locationPoint.longitude,
+        locationPoint.northing,
+        locationPoint.easting,
+        locationPoint.zone,
+        locationPoint.band,
+        locationPoint.name,
+        locationPoint.height));
     state = value.fold((l) {
       return state.copyWith(isLoading: false);
     }, (r) {
-      return state.copyWith(isLoading: false,);
-
-    }
-    );
-    await _ref.read(getPointsProvider.notifier).getPoints();
+      return state.copyWith(
+        isLoading: false,
+      );
+    });
+    // await _ref.read(getPointsProvider.notifier).getPoints();
   }
 }
 
-final addPointsProvider = StateNotifierProvider<AddPointsNotifier, MapDataState>((ref) {
-  final useCase = ref.read(addPointUseCaseProvider);
-  return AddPointsNotifier(useCase,ref);
+final addPointsProvider =
+    StateNotifierProvider<AddPointsNotifier, MapDataState>((ref) {
+  final useCase = ref.read(addFirestorePointsUseCaseProvider);
+  return AddPointsNotifier(useCase);
 });

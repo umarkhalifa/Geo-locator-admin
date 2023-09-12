@@ -1,19 +1,14 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:hive_flutter/hive_flutter.dart';
-import 'package:land_survey/features/map/domain/entity/location_point.dart';
 
 import 'core/router/router.dart';
-import 'features/map/data/data_soucre/map_local_data_source.dart';
 import 'firebase_options.dart';
 
-void main()async{
-  await Hive.initFlutter();
-  Hive.registerAdapter(LocationPointAdapter());
-  boxLocation = await Hive.openBox<LocationPoint>('locations');
-  await Firebase . initializeApp (
-    options : DefaultFirebaseOptions . currentPlatform ,
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
   );
   runApp(const ProviderScope(child: MyApp()));
 }
@@ -35,5 +30,3 @@ class MyApp extends ConsumerWidget {
     );
   }
 }
-
-

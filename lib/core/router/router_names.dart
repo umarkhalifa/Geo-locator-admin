@@ -1,3 +1,1 @@
-enum RouterNames{
-  splash,login,register,home
-}
+enum RouterNames { splash, login, register, home }

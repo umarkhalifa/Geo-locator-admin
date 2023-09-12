@@ -12,7 +12,6 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen> {
   void navigate() async {
-
     await Future.delayed(const Duration(seconds: 3)).then(
       (value) => context.goNamed(RouterNames.login.name),
     );
@@ -36,8 +35,8 @@ class _SplashScreenState extends State<SplashScreen> {
             child: SizedBox(
               height: 200,
               width: 200,
-              child:
-                  Lottie.asset("assets/images/animation'.json", fit: BoxFit.cover),
+              child: Lottie.asset("assets/images/animation'.json",
+                  fit: BoxFit.cover),
             ),
           ),
           const Text("Fetching your location....")

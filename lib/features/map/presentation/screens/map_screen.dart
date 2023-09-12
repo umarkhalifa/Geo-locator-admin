@@ -18,5 +18,3 @@ class MapScreen extends ConsumerWidget {
     );
   }
 }
-
-

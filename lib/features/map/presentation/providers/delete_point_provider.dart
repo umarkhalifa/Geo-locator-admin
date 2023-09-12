@@ -1,31 +1,21 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:land_survey/features/map/domain/usecases/delete_point_usecase.dart';
+import 'package:land_survey/features/map/domain/usecases/delet_firestore_points.dart';
 import 'package:land_survey/features/map/presentation/providers/map_data_state.dart';
 
-import 'get_point_provider.dart';
-
 class DeletePointsNotifier extends StateNotifier<MapDataState> {
-  DeletePointsNotifier(this._deletePointUseCase, this._ref)
+  DeletePointsNotifier(this._deletePointUseCase)
       : super(MapDataState.initial());
 
-  final DeletePointUseCase _deletePointUseCase;
-  final Ref _ref;
+  final DeleteFireStorePointUseCase _deletePointUseCase;
 
   Future<void> getPoints(int index) async {
-    final value = await _deletePointUseCase.call(index);
-    state = value.fold((l) {
-      return state.copyWith(isLoading: false);
-    }, (r) {
-      return state.copyWith(
-        isLoading: false,
-      );
-    });
-    await _ref.read(getPointsProvider.notifier).getPoints();
+    await _deletePointUseCase.call(index);
+    state = state.copyWith(isLoading: false);
   }
 }
 
 final deletePointsProvider =
     StateNotifierProvider<DeletePointsNotifier, MapDataState>((ref) {
-  final useCase = ref.read(deletePointUseCaseProvider);
-  return DeletePointsNotifier(useCase, ref);
+  final useCase = ref.read(deleteFirestorePointsUseCaseProvider);
+  return DeletePointsNotifier(useCase);
 });
