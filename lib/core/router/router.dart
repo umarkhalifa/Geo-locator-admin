@@ -10,12 +10,12 @@ import '../../features/authentication/presentation/providers/auth_state_provider
 final routeProvider = Provider((ref) {
   final authState = ref.watch(authStateNotifier);
   return GoRouter(
+    initialLocation: '/login',
     redirect: (context, state) {
       final isLoggedIn = authState;
-      if (isLoggedIn && state.location == '/login') return '/home';
+      if (isLoggedIn && state.matchedLocation == '/login') return '/home';
       return null;
     },
-    initialLocation: '/login',
     routes: [
       GoRoute(
         path: '/',

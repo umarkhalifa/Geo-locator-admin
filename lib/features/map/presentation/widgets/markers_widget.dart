@@ -41,13 +41,6 @@ class MarkerIcon extends ConsumerWidget {
             ],
           ),
           const Spacer(),
-          Switch(
-            value: ref.watch(mapNotifierProvider).showCompass,
-            onChanged: (value) {
-              ref.read(mapNotifierProvider.notifier).updateCompass();
-              Navigator.pop(context);
-            },
-          )
         ],
       ),
     );
@@ -64,7 +57,7 @@ class MarkersBottomSheet extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final points = ref.watch(getPointsProvider).points;
+    final points = ref.watch(getPointsProvider).searchPoints;
     return ListView.separated(
       itemBuilder: (context, index) {
         return GestureDetector(
@@ -77,17 +70,10 @@ class MarkersBottomSheet extends ConsumerWidget {
                 });
           },
           //UPDATE MARKER INDEX
-          onTap: () {
-            if (ref.read(mapNotifierProvider).showCompass) {
-              ref.read(markerIndex.notifier).state = index;
-              Navigator.pop(context);
-            } else {
-              if (locationFuture != null) {
-                locationFuture!(points?[index].latitude ?? 0,
-                    points?[index].longitude ?? 0);
-                Navigator.pop(context);
-              }
-            }
+          onTap: () async {
+            ref.read(markerIndex.notifier).state = index;
+            ref.read(mapNotifierProvider.notifier).updateCompass(true);
+            Navigator.pop(context);
           },
           child: Container(
             decoration: BoxDecoration(

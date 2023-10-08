@@ -1,87 +1,146 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:land_survey/features/map/presentation/providers/get_point_provider.dart';
+import 'package:land_survey/features/map/presentation/providers/map_state_provider.dart';
+import 'package:land_survey/features/map/presentation/widgets/land_map.dart';
+import 'package:solar_icons/solar_icons.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../../../core/constants/sizes.dart';
 
-class DistanceCard extends StatelessWidget {
-  final LatLng loc1;
-  final LatLng loc2;
+class DistanceCard extends ConsumerWidget {
+  final Future<void> Function(double lat, double long) locationFuture;
 
-  const DistanceCard({super.key, required this.loc1, required this.loc2});
+  const DistanceCard({
+    super.key,
+    required this.locationFuture,
+  });
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final points = ref.watch(getPointsProvider).points;
+    final polyIndex = ref.watch(markerIndex);
+    final userLocation = ref.watch(mapNotifierProvider);
     return Positioned(
-      bottom: 100,
+      bottom: 30,
       left: 15,
       right: 15,
-      child: Row(
-        children: [
-          Expanded(
-            child: Container(
-              height: 70,
-              // width: MediaQuery.sizeOf(context).width,
-              decoration: BoxDecoration(
-                  color: Colors.white, borderRadius: BorderRadius.circular(12)),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Text(
-                    "Distance",
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
-                  ),
-                  Text(
-                      "${calculateDistance(loc1.latitude, loc1.longitude, loc2.latitude, loc2.longitude).toStringAsFixed(6)} km"),
-                ],
-              ),
+      child: Container(
+        height: 170,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(15),
+          color: Colors.white,
+        ),
+        width: MediaQuery.sizeOf(context).width,
+        padding: const EdgeInsets.all(10),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              points?[polyIndex].name ?? '',
+              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
             ),
-          ),
-          gapW20,
-          Expanded(
-            child: Container(
-              height: 70,
-              // width: MediaQuery.sizeOf(context).width,
-              decoration: BoxDecoration(
-                  color: Colors.white, borderRadius: BorderRadius.circular(12)),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Text(
-                    "Bearing",
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+            Text(
+                "Northing: ${points?[polyIndex].northing},  Easting: ${points?[polyIndex].easting}"),
+            Text(
+                "Bearing: ${calculateInitialBearing(points?[polyIndex].latitude ?? 0, points?[polyIndex].longitude ?? 0, userLocation.latitude, userLocation.longitude).toStringAsFixed(3)}°"),
+            Text("Height:${points?[polyIndex].height}"),
+            const Spacer(),
+            Row(
+              children: [
+                GestureDetector(
+                  onTap: () async {
+                    final Uri googleMapsUrl = Uri.parse(
+                        'https://www.google.com/maps/dir/?api=1&destination=${points?[polyIndex].latitude ?? 0},${points?[polyIndex].longitude ?? 0}');
+                    if (await canLaunchUrl(googleMapsUrl)) {
+                      await launchUrl(googleMapsUrl);
+                    } else {
+                      throw 'Could not launch Google Maps';
+                    }
+                  },
+                  child: Container(
+                    width: 140,
+                    height: 40,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(40),
+                      color: Colors.blue,
+                    ),
+                    child: const Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(
+                          SolarIconsBold.routing2,
+                          color: Colors.white,
+                        ),
+                        gapW8,
+                        Text(
+                          "Directions",
+                          style: TextStyle(color: Colors.white),
+                        )
+                      ],
+                    ),
                   ),
-                  Text(
-                      "${calculateInitialBearing(loc1.latitude, loc1.longitude, loc2.latitude, loc2.longitude).toStringAsFixed(6)}°"),
-                ],
-              ),
-            ),
-          ),
-        ],
+                ),
+                gapW20,
+                GestureDetector(
+                  onTap: () {
+                    locationFuture(points?[polyIndex].latitude ?? 0,
+                        points?[polyIndex].longitude ?? 0);
+                  },
+                  child: Container(
+                    width: 140,
+                    height: 40,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(40),
+                      color: Colors.blue,
+                    ),
+                    child: const Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(
+                          SolarIconsBold.mapPoint,
+                          color: Colors.white,
+                        ),
+                        gapW8,
+                        Text(
+                          "Navigate",
+                          style: TextStyle(color: Colors.white),
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            )
+          ],
+        ),
       ),
     );
   }
 }
 
-double calculateDistance(double lat1, double long1, double lat2, double long2) {
-  const double earthRadius = 6371; // Earth's radius in kilometers
+double calculateDistance(double lat1, double lon1, double lat2, double lon2) {
+  const radius = 6371.0; // Earth's radius in kilometers
 
-  double dLat = _degreesToRadians(lat2 - lat1);
-  double dLong = _degreesToRadians(long2 - long1);
+  final dLat = _degreesToRadians(lat2 - lat1);
+  final dLon = _degreesToRadians(lon2 - lon1);
 
-  double a = pow(sin(dLat / 2), 2) +
+  final a = sin(dLat / 2.0) * sin(dLat / 2.0) +
       cos(_degreesToRadians(lat1)) *
           cos(_degreesToRadians(lat2)) *
-          pow(sin(dLong / 2), 2);
-  double c = 2 * atan2(sqrt(a), sqrt(1 - a));
+          sin(dLon / 2.0) *
+          sin(dLon / 2.0);
+  final c = 2.0 * atan2(sqrt(a), sqrt(1.0 - a));
 
-  double distance = earthRadius * c;
+  final distance = radius * c;
+
   return distance;
 }
 
 double _degreesToRadians(double degrees) {
-  return degrees * pi / 180;
+  return degrees * (pi / 180);
 }
 
 double calculateInitialBearing(

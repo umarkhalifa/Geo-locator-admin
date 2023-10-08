@@ -4,21 +4,16 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:land_survey/core/constants/sizes.dart';
 import 'package:land_survey/features/map/presentation/widgets/location_card.dart';
 import 'package:land_survey/features/map/presentation/widgets/map_type_widgets.dart';
-import 'package:land_survey/features/map/presentation/widgets/markers_widget.dart';
 import 'package:land_survey/features/map/presentation/widgets/users.dart';
 import 'package:land_survey/features/map/presentation/widgets/utm_coordinates_widgets.dart';
 import 'package:solar_icons/solar_icons.dart';
 
 class LandBottomSheet extends HookWidget {
-  final TextEditingController latController;
-  final TextEditingController longController;
   final Future<void> Function(double lat, double long) locationFuture;
 
   const LandBottomSheet({
     super.key,
     required this.locationFuture,
-    required this.latController,
-    required this.longController,
   });
 
   @override
@@ -56,15 +51,7 @@ class LandBottomSheet extends HookWidget {
                   ),
                 ],
               ),
-              gapH24,
-              LocationCard(
-                  latController: latController,
-                  longController: longController,
-                  locationFuture: locationFuture),
-              gapH24,
-              const Divider(
-                thickness: 0.4,
-              ),
+              gapH12,
               const MapTypeIcon(),
               const Divider(
                 thickness: 0.4,
@@ -79,11 +66,8 @@ class LandBottomSheet extends HookWidget {
               const Divider(
                 thickness: 0.4,
               ),
-              const MarkerIcon(),
-              gapH16,
-              MarkersBottomSheet(
-                locationFuture: locationFuture,
-              ),
+              gapH8,
+              LocationCard(locationFuture: locationFuture),
               const Divider(
                 thickness: 0.4,
               ),

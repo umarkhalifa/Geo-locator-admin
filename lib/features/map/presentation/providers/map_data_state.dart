@@ -10,9 +10,19 @@ class MapDataState {
   final bool isLoading;
   final bool showCompass;
   final List<LocationPoint>? points;
+  final List<LocationPoint>? searchPoints;
+  final List<LatLng>? polyPoints;
 
-  MapDataState(this.latitude, this.longitude, this.mapType, this.markers,
-      this.isLoading, this.showCompass, this.points);
+  MapDataState(
+      this.latitude,
+      this.longitude,
+      this.mapType,
+      this.markers,
+      this.isLoading,
+      this.showCompass,
+      this.points,
+      this.searchPoints,
+      this.polyPoints);
 
   MapDataState.initial({
     this.longitude = 0.0,
@@ -22,6 +32,8 @@ class MapDataState {
     this.isLoading = false,
     this.showCompass = false,
     this.points = const [],
+    this.searchPoints = const [],
+    this.polyPoints = const [],
   });
 
   MapDataState copyWith({
@@ -32,6 +44,8 @@ class MapDataState {
     bool? isLoading,
     bool? showCompass,
     List<LocationPoint>? points,
+    List<LocationPoint>? searchPoints,
+    List<LatLng>? polyPoints,
   }) {
     return MapDataState(
         latitude ?? this.latitude,
@@ -40,7 +54,9 @@ class MapDataState {
         markers ?? this.markers,
         isLoading ?? this.isLoading,
         showCompass ?? this.showCompass,
-        points ?? this.points);
+        points ?? this.points,
+        searchPoints ?? this.searchPoints,
+        polyPoints ?? this.polyPoints);
   }
 }
 
