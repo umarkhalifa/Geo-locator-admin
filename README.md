@@ -1,6 +1,6 @@
-# land_survey
+# Geo Loactor
 
-Geo Nav
+Geo Locator Admim
 This is a Flutter project template built using Clean Architecture principles. Clean Architecture is an architectural approach that promotes separation of concerns, making your codebase more maintainable, testable, and scalable.
 
 Project Structure
